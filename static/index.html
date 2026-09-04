@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <main class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Calculator home"><span class="brand-mark">+</span> CALC / 01</a>
+            <span class="status"><i></i> API READY</span>
+        </header>
+
+        <section class="workspace">
+            <div class="intro">
+                <p class="kicker">PRECISION, WITHOUT THE NOISE</p>
+                <h1>Make the<br><em>numbers</em> work.</h1>
+                <p class="lede">A focused calculator for quick decisions, clean inputs, and reliable results.</p>
+            </div>
+
+            <section class="calculator" aria-label="Calculator">
+                <div class="display-wrap">
+                    <div class="display-meta"><span id="displayHint">Ready when you are</span><span id="displayCount">0
+                            / 100</span></div>
+                    <input id="display" class="display" type="text" inputmode="decimal" autocomplete="off"
+                        spellcheck="false" placeholder="0" aria-label="Calculation expression">
+                    <div id="result" class="result" aria-live="polite">0</div>
+                </div>
+                <div class="keypad">
+                    <button class="key utility" data-action="clear">AC</button>
+                    <button class="key utility" data-action="backspace" aria-label="Delete">DEL</button>
+                    <button class="key operator" data-value="%">%</button>
+                    <button class="key operator" data-value="/">÷</button>
+                    <button class="key" data-value="7">7</button>
+                    <button class="key" data-value="8">8</button>
+                    <button class="key" data-value="9">9</button>
+                    <button class="key operator" data-value="*">×</button>
+                    <button class="key" data-value="4">4</button>
+                    <button class="key" data-value="5">5</button>
+                    <button class="key" data-value="6">6</button>
+                    <button class="key operator" data-value="-">−</button>
+                    <button class="key" data-value="1">1</button>
+                    <button class="key" data-value="2">2</button>
+                    <button class="key" data-value="3">3</button>
+                    <button class="key operator" data-value="+">+</button>
+                    <button class="key wide" data-value="0">0</button>
+                    <button class="key" data-value=".">.</button>
+                    <button class="key equals" data-action="calculate">=</button>
+                </div>
+            </section>
+
+            <aside class="history-panel">
+                <div class="panel-heading"><span>Recent calculations</span><button id="clearHistory" class="text-button"
+                        type="button">Clear</button></div>
+                <ol id="history" class="history">
+                    <li class="empty-history">Your latest results will appear here.</li>
+                </ol>
+            </aside>
+        </section>
+        <footer><span>Supports + − × ÷ % and parentheses</span><span>ENTER to calculate</span></footer>
+    </main>
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
