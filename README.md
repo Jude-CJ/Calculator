@@ -1,30 +1,29 @@
-# 🧮 Calculator
+🧮 Calculator
 
-A modern web-based calculator built with Python, FastAPI, HTML, CSS, and JavaScript.
+A modern calculator web application.
 
-## 🚀 Features
+Features
+├── Basic arithmetic
+├── Expression evaluation
+├── Calculation history
+├── Keyboard support
+└── Responsive UI
 
-- Basic arithmetic operations
-- Expression evaluation
-- Responsive calculator interface
-- Calculation history
-- Keyboard support
-- FastAPI backend
-- Modern user interface
+Technologies
+├── Python
+├── FastAPI
+├── Uvicorn
+├── HTML
+├── CSS
+└── JavaScript
 
-## 🛠️ Technologies Used
+Installation
+├── Clone repository
+├── Install requirements
+├── Run FastAPI
+└── Open localhost
 
-- Python
-- FastAPI
-- Uvicorn
-- HTML
-- CSS
-- JavaScript
-
-## ▶️ Running Locally
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR-USERNAME/Calculator.git
-cd Calculator
+Project structure
+Screenshots
+Future improvements
+Author: Jude Clive
