@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="utf-8">
@@ -17,7 +17,11 @@
     <main class="app-shell">
         <header class="topbar">
             <a class="brand" href="/" aria-label="Calculator home"><span class="brand-mark">+</span> CALC / 01</a>
-            <span class="status"><i></i> API READY</span>
+            <div class="topbar-actions">
+                <span class="status"><i></i> API READY</span>
+                <button id="themeToggle" class="icon-button" type="button" aria-label="Switch to dark mode"
+                    title="Toggle color theme">◐</button>
+            </div>
         </header>
 
         <section class="workspace">
@@ -28,6 +32,16 @@
             </div>
 
             <section class="calculator" aria-label="Calculator">
+                <div class="calculator-head">
+                    <div>
+                        <span class="panel-label">WORKSPACE</span>
+                        <h2>Calculator</h2>
+                    </div>
+                    <div class="mode-switch" role="group" aria-label="Calculator mode">
+                        <button class="mode-button is-active" type="button" data-mode="basic">Basic</button>
+                        <button class="mode-button" type="button" data-mode="scientific">Scientific</button>
+                    </div>
+                </div>
                 <div class="display-wrap">
                     <div class="display-meta"><span id="displayHint">Ready when you are</span><span id="displayCount">0
                             / 100</span></div>
@@ -35,32 +49,44 @@
                         spellcheck="false" placeholder="0" aria-label="Calculation expression">
                     <div id="result" class="result" aria-live="polite">0</div>
                 </div>
+                <div class="scientific-keys" aria-label="Scientific functions">
+                    <button class="key function" type="button" data-value="sin(">sin</button>
+                    <button class="key function" type="button" data-value="cos(">cos</button>
+                    <button class="key function" type="button" data-value="tan(">tan</button>
+                    <button class="key function" type="button" data-value="sqrt(">sqrt</button>
+                    <button class="key function" type="button" data-value="log(">log</button>
+                    <button class="key function" type="button" data-value="ln(">ln</button>
+                    <button class="key function" type="button" data-value="pi">π</button>
+                    <button class="key function" type="button" data-value="e">e</button>
+                </div>
                 <div class="keypad">
-                    <button class="key utility" data-action="clear">AC</button>
-                    <button class="key utility" data-action="backspace" aria-label="Delete">DEL</button>
-                    <button class="key operator" data-value="%">%</button>
-                    <button class="key operator" data-value="/">÷</button>
-                    <button class="key" data-value="7">7</button>
-                    <button class="key" data-value="8">8</button>
-                    <button class="key" data-value="9">9</button>
-                    <button class="key operator" data-value="*">×</button>
-                    <button class="key" data-value="4">4</button>
-                    <button class="key" data-value="5">5</button>
-                    <button class="key" data-value="6">6</button>
-                    <button class="key operator" data-value="-">−</button>
-                    <button class="key" data-value="1">1</button>
-                    <button class="key" data-value="2">2</button>
-                    <button class="key" data-value="3">3</button>
-                    <button class="key operator" data-value="+">+</button>
-                    <button class="key wide" data-value="0">0</button>
-                    <button class="key" data-value=".">.</button>
-                    <button class="key equals" data-action="calculate">=</button>
+                    <button class="key utility" type="button" data-action="clear">AC</button>
+                    <button class="key utility" type="button" data-action="backspace" aria-label="Delete">DEL</button>
+                    <button class="key operator" type="button" data-value="%">%</button>
+                    <button class="key operator" type="button" data-value="/">÷</button>
+                    <button class="key" type="button" data-value="7">7</button>
+                    <button class="key" type="button" data-value="8">8</button>
+                    <button class="key" type="button" data-value="9">9</button>
+                    <button class="key operator" type="button" data-value="*">×</button>
+                    <button class="key" type="button" data-value="4">4</button>
+                    <button class="key" type="button" data-value="5">5</button>
+                    <button class="key" type="button" data-value="6">6</button>
+                    <button class="key operator" type="button" data-value="-">−</button>
+                    <button class="key" type="button" data-value="1">1</button>
+                    <button class="key" type="button" data-value="2">2</button>
+                    <button class="key" type="button" data-value="3">3</button>
+                    <button class="key operator" type="button" data-value="+">+</button>
+                    <button class="key wide" type="button" data-value="0">0</button>
+                    <button class="key" type="button" data-value=".">.</button>
+                    <button class="key equals" type="button" data-action="calculate">=</button>
                 </div>
             </section>
 
             <aside class="history-panel">
-                <div class="panel-heading"><span>Recent calculations</span><button id="clearHistory" class="text-button"
-                        type="button">Clear</button></div>
+                <div class="panel-heading">
+                    <div><span class="panel-label">ACTIVITY</span><strong>Recent calculations</strong></div><button
+                        id="clearHistory" class="text-button" type="button">Clear all</button>
+                </div>
                 <ol id="history" class="history">
                     <li class="empty-history">Your latest results will appear here.</li>
                 </ol>

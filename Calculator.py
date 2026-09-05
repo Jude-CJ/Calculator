@@ -1,5 +1,6 @@
 from pathlib import Path
 import ast
+import math
 import operator
 
 from fastapi import FastAPI, HTTPException
@@ -33,6 +34,18 @@ BINARY_OPERATORS = {
 	ast.Mod: operator.mod,
 }
 UNARY_OPERATORS = {ast.UAdd: operator.pos, ast.USub: operator.neg}
+SCIENTIFIC_FUNCTIONS = {
+	"sin": math.sin,
+	"cos": math.cos,
+	"tan": math.tan,
+	"sqrt": math.sqrt,
+	"log": math.log10,
+	"ln": math.log,
+	"abs": abs,
+	"floor": math.floor,
+	"ceil": math.ceil,
+}
+SCIENTIFIC_CONSTANTS = {"pi": math.pi, "e": math.e}
 
 
 def evaluate_expression(expression: str) -> float | int:
@@ -58,6 +71,14 @@ def evaluate_node(node: ast.AST) -> float | int:
 
 	if isinstance(node, ast.UnaryOp) and type(node.op) in UNARY_OPERATORS:
 		return UNARY_OPERATORS[type(node.op)](evaluate_node(node.operand))
+
+	if isinstance(node, ast.Name) and node.id in SCIENTIFIC_CONSTANTS:
+		return SCIENTIFIC_CONSTANTS[node.id]
+
+	if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in SCIENTIFIC_FUNCTIONS:
+		if len(node.args) != 1 or node.keywords:
+			raise ValueError("Scientific functions accept one value")
+		return SCIENTIFIC_FUNCTIONS[node.func.id](evaluate_node(node.args[0]))
 
 	raise ValueError("Only numbers and calculator operators are supported")
 

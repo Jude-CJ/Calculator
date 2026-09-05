@@ -3,6 +3,9 @@ const result = document.querySelector('#result');
 const hint = document.querySelector('#displayHint');
 const count = document.querySelector('#displayCount');
 const historyList = document.querySelector('#history');
+const themeToggle = document.querySelector('#themeToggle');
+const modeButtons = document.querySelectorAll('[data-mode]');
+const scientificKeys = document.querySelector('.scientific-keys');
 const history = [];
 
 function updateCount() {
@@ -52,7 +55,26 @@ document.querySelector('.keypad').addEventListener('click', event => {
     if (button.dataset.action === 'calculate') calculate();
 });
 
-display.addEventListener('input', () => { display.value = display.value.replace(/[^0-9+*/%(). -]/g, '').slice(0, 100); updateCount(); });
+display.addEventListener('input', () => { display.value = display.value.replace(/[^0-9a-zA-Z+*/%()., -]/g, '').slice(0, 100); updateCount(); });
 display.addEventListener('keydown', event => { if (event.key === 'Enter') calculate(); if (event.key === 'Escape') document.querySelector('[data-action="clear"]').click(); });
 document.querySelector('#clearHistory').addEventListener('click', () => { history.length = 0; renderHistory(); });
+
+function setTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    const isDark = theme === 'dark';
+    themeToggle.textContent = isDark ? '☼' : '◐';
+    themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    localStorage.setItem('calculator-theme', theme);
+}
+
+themeToggle.addEventListener('click', () => {
+    setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+
+modeButtons.forEach(button => button.addEventListener('click', () => {
+    modeButtons.forEach(item => item.classList.toggle('is-active', item === button));
+    scientificKeys.hidden = button.dataset.mode !== 'scientific';
+}));
+
+setTheme(localStorage.getItem('calculator-theme') || 'light');
 updateCount();
