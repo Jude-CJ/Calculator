@@ -46,7 +46,7 @@ async function calculate() {
     }
 }
 
-document.querySelector('.keypad').addEventListener('click', event => {
+document.querySelector('.calculator').addEventListener('click', event => {
     const button = event.target.closest('button');
     if (!button) return;
     if (button.dataset.value) addValue(button.dataset.value);
