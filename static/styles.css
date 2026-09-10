@@ -229,6 +229,16 @@ h1 em {
     background: var(--paper);
 }
 
+.angle-switch {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+    padding: 3px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+}
+
 .mode-button {
     padding: 6px 9px;
     border: 0;
@@ -241,6 +251,23 @@ h1 em {
 }
 
 .mode-button.is-active {
+    color: var(--ink);
+    background: var(--panel);
+    box-shadow: 0 1px 4px var(--shadow);
+}
+
+.angle-button {
+    padding: 6px 7px;
+    border: 0;
+    border-radius: 5px;
+    color: var(--muted);
+    background: transparent;
+    font: 500 10px "DM Mono", monospace;
+    cursor: pointer;
+    transition: color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+
+.angle-button.is-active {
     color: var(--ink);
     background: var(--panel);
     box-shadow: 0 1px 4px var(--shadow);
@@ -547,6 +574,11 @@ footer {
 
     .mode-button {
         padding-inline: 7px;
+        font-size: 9px;
+    }
+
+    .angle-button {
+        padding-inline: 6px;
         font-size: 9px;
     }
 

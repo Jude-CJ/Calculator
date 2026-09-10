@@ -5,8 +5,10 @@ const count = document.querySelector('#displayCount');
 const historyList = document.querySelector('#history');
 const themeToggle = document.querySelector('#themeToggle');
 const modeButtons = document.querySelectorAll('[data-mode]');
+const angleButtons = document.querySelectorAll('[data-angle-mode]');
 const scientificKeys = document.querySelector('.scientific-keys');
 const history = [];
+let angleMode = localStorage.getItem('calculator-angle-mode') || 'RAD';
 
 function updateCount() {
     count.textContent = `${display.value.length} / 100`;
@@ -32,7 +34,7 @@ async function calculate() {
     if (!expression) return;
     hint.textContent = 'Calculating...';
     try {
-        const response = await fetch('/api/calc', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ expression }) });
+        const response = await fetch('/api/calc', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ expression, angle_mode: angleMode }) });
         const data = await response.json();
         if (!response.ok) throw new Error(data.detail || 'Calculation failed');
         result.textContent = data.result;
@@ -76,5 +78,14 @@ modeButtons.forEach(button => button.addEventListener('click', () => {
     scientificKeys.hidden = button.dataset.mode !== 'scientific';
 }));
 
+function setAngleMode(mode) {
+    angleMode = mode;
+    angleButtons.forEach(button => button.classList.toggle('is-active', button.dataset.angleMode === mode));
+    localStorage.setItem('calculator-angle-mode', mode);
+}
+
+angleButtons.forEach(button => button.addEventListener('click', () => setAngleMode(button.dataset.angleMode)));
+
 setTheme(localStorage.getItem('calculator-theme') || 'light');
+setAngleMode(angleMode === 'DEG' ? 'DEG' : 'RAD');
 updateCount();
